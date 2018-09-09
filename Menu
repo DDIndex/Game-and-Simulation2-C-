@@ -1,0 +1,122 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Lab6Menu
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Welsome to the MC muenu!\nWhat would you like to order today?");
+            Console.WriteLine("1.Big Mac Meal\n2.French Fries\n3.Drink 4.Icecream 5.Pie");
+            int choice = Convert.ToInt32(Console.ReadLine());
+            bool addOn = true;
+            int order1Count =0;
+            int order2Count =0;
+            int order3Count = 0;
+            int order4Count =0;
+            int order5Count =0;
+            string order1= "Big Mac", order2= "French Fries", order3= "Drink", order4= "Icecream", order5= "Pie";
+            string size2num = "";
+            string size2 = "";
+            do
+            {
+                switch (choice)
+                {
+                    case 1:
+                        
+                            order1Count+=1;
+                            Console.WriteLine(order1+" +1\nAnything else?(Meal# or no)");
+                            string input1 = Console.ReadLine();
+                            if (input1 == "no")
+                            {
+                                addOn = false;
+                            }else
+                            {
+                                choice = Convert.ToInt32(input1);
+                            }
+                            break;
+                        
+                    case 2:
+                        
+                        order2Count +=1;
+                        Console.WriteLine("1.Small 2.Medium 3.Large");
+                        size2num = Console.ReadLine();
+                        if(size2num == "1")
+                        {
+                            size2 += "small";
+                        }else if(size2num == "2")
+                        {
+                            size2 = "medium";
+                        }else if(size2num == "3")
+                        {
+                            size2 = "large";
+                        }
+                            Console.WriteLine(order2+" +1\nAnything else?(Meal# or no)");
+                            string input2 = Console.ReadLine();
+                            if (input2 == "no")
+                            {
+                                addOn = false;
+                            }
+                            else
+                            {
+                                choice = Convert.ToInt32(input2);
+                            }
+                            break;
+                        
+                    case 3:
+
+                        order3Count += 1;
+                        Console.WriteLine(order3 + " +1\nAnything else?(Meal# or no)");
+                        string input3 = Console.ReadLine();
+                        if (input3 == "no")
+                        {
+                            addOn = false;
+                        }
+                        else
+                        {
+                            choice = Convert.ToInt32(input3);
+                        }
+                        break;
+                    case 4:
+                        order4Count = +1;
+                        Console.WriteLine(order4 + " +1\nAnything else?(Meal# or no)");
+                        string input4 = Console.ReadLine();
+                        if (input4 == "no")
+                        {
+                            addOn = false;
+                        }
+                        else
+                        {
+                            choice = Convert.ToInt32(input4);
+                        }
+                        break;
+                    case 5:
+                        order5Count = +1;
+                        Console.WriteLine(order5 + " +1\nAnything else?(Meal# or no)");
+                        string input5 = Console.ReadLine();
+                        if (input5 == "no")
+                        {
+                            addOn = false;
+                        }
+                        else
+                        {
+                            choice = Convert.ToInt32(input5);
+                        }
+                        break;
+                    default: break;
+
+                }
+
+
+            } while (addOn == true);
+
+            Console.WriteLine(order1Count+order1+","+ order2Count + order2 + ","+order3Count + order3 + ","+order4Count + order4 + ","+order5Count+order5);
+            Console.ReadKey();
+
+        }
+    }
+}
