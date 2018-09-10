@@ -11,66 +11,101 @@ namespace Lab6Menu
         static void Main(string[] args)
         {
             Console.WriteLine("Welsome to the MC muenu!\nWhat would you like to order today?");
-            Console.WriteLine("1.Big Mac Meal\n2.French Fries\n3.Drink 4.Icecream 5.Pie");
+            Console.WriteLine("1.Big Mac Meal\n2.French Fries\n3.Drink \n4.Icecream \n5.Pie");
             int choice = Convert.ToInt32(Console.ReadLine());
             bool addOn = true;
-            int order1Count =0;
-            int order2Count =0;
-            int order3Count = 0;
-            int order4Count =0;
-            int order5Count =0;
-            string order1= "Big Mac", order2= "French Fries", order3= "Drink", order4= "Icecream", order5= "Pie";
+            int order1Count = 0;
+            int order4Count = 0;
+            int order5Count = 0;
+            string order1 = "Big Mac", order2 = "French Fries", order3 = "Drink", order4 = "Icecream", order5 = "Pie";
+            //additional codes for FF size below
             string size2num = "";
             string size2 = "";
+            int size2CountS = 0, size2CountM = 0, size2CountL = 0;
+            //additional codes for D size below
+            string size3num = "";
+            string size3 = "";
+            int size3CountS = 0, size3CountM = 0, size3CountL = 0;
+            //string order2SList = "";
             do
             {
                 switch (choice)
                 {
                     case 1:
-                        
-                            order1Count+=1;
-                            Console.WriteLine(order1+" +1\nAnything else?(Meal# or no)");
-                            string input1 = Console.ReadLine();
-                            if (input1 == "no")
-                            {
-                                addOn = false;
-                            }else
-                            {
-                                choice = Convert.ToInt32(input1);
-                            }
-                            break;
-                        
+
+                        order1Count += 1;//# of BM +1
+                        Console.WriteLine("\n" + order1 + " +1\n\n-----------\nAnything else?(Meal# or no)");
+                        string input1 = Console.ReadLine();
+                        if (input1 == "no")//end order
+                        {
+                            addOn = false;
+                        }
+                        else
+                        {
+                            choice = Convert.ToInt32(input1);//continue order
+                        }
+                        break;
+
                     case 2:
-                        
-                        order2Count +=1;
+
+
                         Console.WriteLine("1.Small 2.Medium 3.Large");
                         size2num = Console.ReadLine();
-                        if(size2num == "1")
+                        if (size2num == "1")
                         {
-                            size2 += "small";
-                        }else if(size2num == "2")
-                        {
-                            size2 = "medium";
-                        }else if(size2num == "3")
-                        {
-                            size2 = "large";
+                            size2 = "small ";// display for user after every single order
+                            size2CountS += 1;//to test by if-statement at the bottom of the codes and decide whether or not print this size of food out
+
                         }
-                            Console.WriteLine(order2+" +1\nAnything else?(Meal# or no)");
-                            string input2 = Console.ReadLine();
-                            if (input2 == "no")
-                            {
-                                addOn = false;
-                            }
-                            else
-                            {
-                                choice = Convert.ToInt32(input2);
-                            }
-                            break;
-                        
+                        else if (size2num == "2")
+                        {
+                            size2 = "medium ";
+                            size2CountM += 1;
+
+                        }
+                        else if (size2num == "3")
+                        {
+                            size2 = "large ";
+                            size2CountL += 1;
+
+                        }
+                        Console.WriteLine("\n" + size2 + "" + order2 + " +1\n\n-----------\nAnything else?(Meal# or no)");
+                        string input2 = Console.ReadLine();
+                        if (input2 == "no")
+                        {
+                            addOn = false;
+                        }
+                        else
+                        {
+                            choice = Convert.ToInt32(input2);
+                        }
+
+                        break;
+
                     case 3:
 
-                        order3Count += 1;
-                        Console.WriteLine(order3 + " +1\nAnything else?(Meal# or no)");
+
+                        Console.WriteLine("1.Small 2.Medium 3.Large");
+                        size3num = Console.ReadLine();
+                        if (size3num == "1")
+                        {
+                            size3 = "small ";
+                            size3CountS += 1;
+
+                        }
+                        else if (size3num == "2")
+                        {
+                            size3 = "medium ";
+                            size3CountM += 1;
+
+                        }
+                        else if (size3num == "3")
+                        {
+                            size3 = "large ";
+                            size3CountL += 1;
+
+                        }
+                        Console.WriteLine(size3 + order3 + " +1\n\n-----------\nAnything else?(Meal# or no)");
                         string input3 = Console.ReadLine();
                         if (input3 == "no")
                         {
@@ -82,8 +117,8 @@ namespace Lab6Menu
                         }
                         break;
                     case 4:
-                        order4Count = +1;
-                        Console.WriteLine(order4 + " +1\nAnything else?(Meal# or no)");
+                        order4Count += 1;
+                        Console.WriteLine(order4 + " +1\n\n-----------\nAnything else?(Meal# or no)");
                         string input4 = Console.ReadLine();
                         if (input4 == "no")
                         {
@@ -95,8 +130,8 @@ namespace Lab6Menu
                         }
                         break;
                     case 5:
-                        order5Count = +1;
-                        Console.WriteLine(order5 + " +1\nAnything else?(Meal# or no)");
+                        order5Count += 1;
+                        Console.WriteLine(order5 + " +1\n\n-----------\nAnything else?(Meal# or no)");
                         string input5 = Console.ReadLine();
                         if (input5 == "no")
                         {
@@ -114,8 +149,59 @@ namespace Lab6Menu
 
             } while (addOn == true);
 
-            Console.WriteLine(order1Count+order1+","+ order2Count + order2 + ","+order3Count + order3 + ","+order4Count + order4 + ","+order5Count+order5);
-            Console.ReadKey();
+            //variables usually created at the top of all codes...nah
+            string order1List = "";
+            string order2SList = "";
+            string order2MList = "";
+            string order2LList = "";
+            string order3SList = "";
+            string order3MList = "";
+            string order3LList = "";
+            string order4List = "";
+            string order5List = "";
+            //order1 list
+            if (order1Count > 0)
+            {
+                order1List = order1Count + " " + order1 + ",";
+            }
+            //order2 lists
+            if (size2CountS > 0)
+            {
+                order2SList = size2CountS + " Small " + order2 + ",";
+            }
+            if (size2CountM > 0)
+            {
+                order2MList = size2CountM + " Medium " + order2 + "，";
+            }
+            if (size2CountL > 0)
+            {
+                order2LList = size2CountL + " Large " + order2 + ",";
+            }
+            //order3 lists
+            if (size3CountS > 0)
+            {
+                order3SList = size3CountS + " Small " + order3 + ",";
+            }
+            if (size3CountM > 0)
+            {
+                order3MList = size3CountM + " Medium " + order3 + "，";
+            }
+            if (size3CountL > 0)
+            {
+                order3LList = size3CountL + " Large " + order3 + ",";
+            }
+            //order4 list
+            if (order4Count > 0)
+            {
+                order4List = order4Count + " " + order4 + ",";
+            }
+            //order5 list
+            if (order5Count > 0)
+            {
+                order5List = order5Count + " " + order5 + ".";
+            }
+            Console.WriteLine("Order #1:  " + order1List + order2SList + order2MList + order2LList + order3SList + order3MList + order3LList + order4List + order5List);
+            Console.ReadKey();//I REGRET TO BE EXTRA...IT TOOK ME SOOOOOO LONG TO GET BACK ON TRACK
 
         }
     }
