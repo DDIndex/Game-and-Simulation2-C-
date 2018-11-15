@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lab10_chara
 {
-    
+
     enum Race
     {
         Human = 1,
@@ -26,28 +26,133 @@ namespace Lab10_chara
         Sharpshooter,
         Paladin
     }
-    enum Stat : uint
+    enum Health : int
     {
-        Health,
-        Strength,
-        Speed,
-        Defence
+        level1 = 1,
+        level2,
+        level3,
+        level4,
+        level5,
+        level6,
+        level7,
+        level8,
+        level9,
+        level10,
+        level11,
+        level12,
+        level13,
+        level14,
+        level15,
+        level16,
+        level17,
+        level18,
+        level19,
+        level20,
+        level21,
+        level22
+
+    }
+    enum Strength : int
+    {
+        level1 = 1,
+        level2,
+        level3,
+        level4,
+        level5,
+        level6,
+        level7,
+        level8,
+        level9,
+        level10,
+        level11,
+        level12,
+        level13,
+        level14,
+        level15,
+        level16,
+        level17,
+        level18,
+        level19,
+        level20,
+        level21,
+        level22
+    }
+    enum Speed : int
+    {
+        level1 = 1,
+        level2,
+        level3,
+        level4,
+        level5,
+        level6,
+        level7,
+        level8,
+        level9,
+        level10,
+        level11,
+        level12,
+        level13,
+        level14,
+        level15,
+        level16,
+        level17,
+        level18,
+        level19,
+        level20,
+        level21,
+        level22
+    }
+    enum Defence : int
+    {
+        level1 = 1,
+        level2,
+        level3,
+        level4,
+        level5,
+        level6,
+        level7,
+        level8,
+        level9,
+        level10,
+        level11,
+        level12,
+        level13,
+        level14,
+        level15,
+        level16,
+        level17,
+        level18,
+        level19,
+        level20,
+        level21,
+        level22
     }
     class Program
     {
-        
+
         static void Main(string[] args)
         {
+            /*Jing
+             * Game & sim
+             * 11/15/2018
+             */
 
             int choice;
+            string like;
             bool loop = true;
+            Race userRace = 0;
+            Class userClass = 0;
+            string userName = "";
+            Health userHealth = (Health)1;
+            Strength userStrength = (Strength)1;
+            Speed userSpeed = (Speed)1;
+            Defence userDefence = (Defence)1;
             while (loop == true)
             {
-                Race userRace = 0;
-                Class userClass = 0;
+
                 Console.WriteLine("Your name?");
-                string userName = Console.ReadLine();
-                Console.WriteLine("Your Race?");
+                userName = Console.ReadLine();
+                Console.WriteLine("Your Race? 1.Human 2.Orc 3.Elf 4.Dwarf 5.Gnome 6.Hobbit 7.Alien");
                 choice = Convert.ToInt32(Console.ReadLine());
                 if (choice >= 1 && choice <= 7)
                 {
@@ -57,7 +162,7 @@ namespace Lab10_chara
                 {
                     Console.WriteLine("Sorry, your input is not in the range");
                 }
-                Console.WriteLine("Your Class?");
+                Console.WriteLine("Your Class? 1.Mage 2.Barbarian 3.Druid 4.Sharpshooter 5.Paladin");
                 choice = Convert.ToInt32(Console.ReadLine());
                 if (choice >= 1 && choice <= 5)
                 {
@@ -67,61 +172,86 @@ namespace Lab10_chara
                 {
                     Console.WriteLine("Sorry, your input is not in the range");
                 }
-                Console.WriteLine("Please confirm Your info :  Name: " + userName +" Race: "+ userRace +"Class: "+ userClass);
-                Console.WriteLine("Do you like your setup? yes or no");
-                string like = Console.ReadLine();
+                Console.WriteLine($"Please confirm Your info \nName:  {userName}  \nRace:  {userRace}  \nClass: {userClass}");
+                Console.WriteLine("\nDo you like your setup? yes or no");
+                like = Console.ReadLine();
                 if (like == "yes")
                 {
                     loop = false;
                 }
             }
+            loop = true;
+            while (loop == true)
+            {
+                int sum = 0;
+                Console.WriteLine("Now choose you character base stat (in total of 25 point, at least 1 per cate.). ");
+                Console.WriteLine("\nWhat is your Heath stat? (1-22)");
+                choice = Convert.ToInt32(Console.ReadLine());
+                if (choice >= 1 && choice <= 22)
+                {
+                    userHealth = (Health)choice;
+                    sum += choice;
 
-            Stat userHealth = Stat.Health;
-            Stat userStrength = Stat.Strength;
-            Stat userSpeed = Stat.Speed;
-            Stat userDefence = Stat.Defence;
-            Console.WriteLine("Now choose you character base stat (in total of 25 point). ");
-            Console.WriteLine("What is your Heath stat? (1-10)");
-            choice = Convert.ToInt32(Console.ReadLine());
-            if (choice >= 1 && choice <= 22)
-            {
-               
+                }
+                else
+                {
+                    Console.WriteLine("InputNotRange: automatically set to 1");
+                    sum += 1;
+                }
+                Console.WriteLine("\nWhat is your Strength stat? (1-22)");
+                choice = Convert.ToInt32(Console.ReadLine());
+                if (choice >= 1 && choice <= 22)
+                {
+                    userStrength = (Strength)choice;
+                    sum += choice;
+                }
+                else
+                {
+                    Console.WriteLine("InputNotRange: automatically set to 1");
+                    sum += 1;
+                }
+                Console.WriteLine("\nWhat is your Speed stat? (1-22)");
+                choice = Convert.ToInt32(Console.ReadLine());
+                if (choice >= 1 && choice <= 22)
+                {
+                    userSpeed = (Speed)choice;
+                    sum += choice;
+                }
+                else
+                {
+                    Console.WriteLine("InputNotRange: automatically set to 1");
+                    sum += 1;
+                }
+                Console.WriteLine("\nWhat is your Defence stat? (1-22)");
+                choice = Convert.ToInt32(Console.ReadLine());
+                if (choice >= 1 && choice <= 22)
+                {
+                    userDefence = (Defence)choice;
+                    sum += choice;
+                }
+                else
+                {
+                    Console.WriteLine("InputNotRange: automatically set to 1");
+                    sum += 1;
+                }
+                if (sum == 25)
+                {
+                    Console.WriteLine($"Please confirm Your stat info :  \nHealth Level: {(int)userHealth} \nStength Level: {(int)userStrength}\nSpeed Level: {(int)userSpeed}\nDefence Level: {(int)userDefence}");
+                    Console.WriteLine("\nDo you like your stats? yes or no");
+                }
+                else
+                {
+                    Console.WriteLine("Sorry, you must have in total of 25 point. You have " + sum + " points right now.");
+                    Console.WriteLine("Press any key to try again");
+                }
+                like = Console.ReadLine();
+                if (like == "yes" )
+                {
+                    loop = false;
+                }
+
             }
-            else
-            {
-                Console.WriteLine("Sorry, your input is not in the range");
-            }
-            Console.WriteLine("What is your Strength stat? (1-10)");
-            choice = Convert.ToInt32(Console.ReadLine());
-            if (choice >= 1 && choice <= 22)
-            {
-                userStrength = (Stat)choice;
-            }
-            else
-            {
-                Console.WriteLine("Sorry, your input is not in the range");
-            }
-            Console.WriteLine("What is your Speed stat? (1-10)");
-            choice = Convert.ToInt32(Console.ReadLine());
-            if (choice >= 1 && choice <= 22)
-            {
-                userSpeed = (Stat)choice;
-            }
-            else
-            {
-                Console.WriteLine("Sorry, your input is not in the range");
-            }
-            Console.WriteLine("What is your Defence stat? (1-10)");
-            choice = Convert.ToInt32(Console.ReadLine());
-            if (choice >= 1 && choice <= 22)
-            {
-                userDefence = (Stat)choice;
-            }
-            else
-            {
-                Console.WriteLine("Sorry, your input is not in the range");
-            }
-            
+            Console.WriteLine($"Your information :  \nName:\t\t{userName}  \nRace:\t\t{userRace}  \nClass:\t\t{userClass} \nHealth Level:\t{(int)userHealth} \nStength Level:\t{(int)userStrength}\nSpeed Level:\t{(int)userSpeed}\nDefence Level:\t{(int)userDefence}");
             Console.ReadKey();
 
         }
