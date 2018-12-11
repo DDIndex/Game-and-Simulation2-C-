@@ -6,20 +6,20 @@ using System.Threading.Tasks;
 
 namespace Lab11_Fighter
 {
-    struct Info
+    struct Fighter
     {
         public string Name;
         public int Health;
         public int Attack;
-        public int Defence;
+        public int Defense;
         public int Speed;
 
-        public Info(string name,int health,int attack,int defence,int speed)
+        public Fighter(string name,int health,int attack,int defense,int speed)
         {
             Name = name;
             Health = health;
             Attack = attack;
-            Defence = defence;
+            Defense = defense;
             Speed = speed;
 
         }
@@ -39,12 +39,17 @@ namespace Lab11_Fighter
     {
         static void Main(string[] args)
         {
-
+            /*Jing
+             *Game&Sim
+             */
+            Fighter user = new Fighter();
+            Random random = new Random();
+            Fighter computer = new Fighter();
             bool loop = true;
             string like;
             while (loop == true)
             {
-                Info user;
+                
                 int sum = 0;
                 Console.WriteLine("Your name?");
                 user.Name = Console.ReadLine();
@@ -70,11 +75,11 @@ namespace Lab11_Fighter
                     Console.WriteLine("InputNotInRange: automatically set to 1");
                     sum += 1;
                 }
-                Console.WriteLine("Your defence? (1-17)");
-                user.Defence = Convert.ToInt32(Console.ReadLine());
-                if (user.Defence >= 1 && user.Defence <= 17)
+                Console.WriteLine("Your Defense? (1-17)");
+                user.Defense = Convert.ToInt32(Console.ReadLine());
+                if (user.Defense >= 1 && user.Defense <= 17)
                 {
-                    sum += user.Defence;
+                    sum += user.Defense;
                 }
                 else
                 {
@@ -93,10 +98,10 @@ namespace Lab11_Fighter
                     sum += 1;
                 }
 
-                if (sum == 25)
+                if (sum == 20)
                 {
-                    Console.WriteLine($"Please confirm Your info :  \nName: {user.Name} \nHealth Level: {user.Health} \nStength Level: {user.Attack}\nSpeed Level: {user.Speed}\nDefence Level: {user.Defence}");
-                    Console.WriteLine("\nDo you like your stats? yes or no");
+                    Console.WriteLine($"Please confirm Your info :  \nName: {user.Name} \nHealth Level: {user.Health} \nAttack Level: {user.Attack}\nDefense Level: {user.Defense}\nSpeed Level: {user.Speed}");
+                    Console.WriteLine("\nDo you like your stats? 1. yes or 2. no");
                 }
                 else
                 {
@@ -104,12 +109,14 @@ namespace Lab11_Fighter
                     Console.WriteLine("Press any key to try again");
                 }
                 like = Console.ReadLine();
-                if (like == "yes")
+                if (like == "yes"|| like == "1")
                 {
                     loop = false;
                 }
+            }
 
-                int choice;
+
+            int choice;
                 Warrior userType;
                 Console.WriteLine("Your Warrior type?(1.Warrior 2.Cleric 3.Paladin 4.Unicorn Knight 5.Knight 6.Mage)");
                 choice = Convert.ToInt32(Console.ReadLine());
@@ -118,43 +125,151 @@ namespace Lab11_Fighter
                     userType = (Warrior)choice;
                     if(choice ==1)
                     {
-                        user.Attack =+2;
-                        user.Defence =-1;
+                        user.Attack +=2;
+                        user.Defense +=1;
                     }
                     else if (choice == 2)
                     {
-                        user.Health =+ 1;
-                        user.Defence =+ 1;
+                        user.Health += 1;
+                        user.Defense += 1;
                     }
                     else if (choice == 3)
                     {
-                        user.Defence = +2;
-                        user.Attack = -1;
+                        user.Defense +=2;
+                        user.Attack +=1;
                     }
                     else if (choice == 4)
                     {
-                        user.Health = -2;
-                        user.Speed = +5;
+                        user.Health +=2;
+                        user.Speed +=5;
                     }
                     else if (choice == 5)
                     {
-                        user.Attack = +1;
-                        user.Defence = +1;
-                        user.Speed = -1;
+                        user.Attack +=1;
+                        user.Defense +=1;
+                        user.Speed +=1;
                     }
                     else if (choice == 6)
                     {
-                        user.Defence = -3;
-                        user.Attack = +3;
+                        user.Defense +=3;
+                        user.Attack +=3;
                     }
                 }
                 else
                 {
                     Console.WriteLine("Sorry, your input is not in the range");
                 }
-               
 
+            loop = true;
+            while (loop == true)
+            {
+                int sum = 0;
+                computer.Health = random.Next(1, 18);
+                sum += computer.Health;
+                computer.Attack = random.Next(1, 18);
+                sum += computer.Attack;
+                computer.Defense = random.Next(1, 18);
+                sum += computer.Defense;
+                computer.Speed = random.Next(1, 18);
+                sum += computer.Speed;
+                if (sum == 20 && computer.Speed != user.Speed)//making sure the rand speed set for comp. doesn't equals to the user's speed stat
+                {
+                    loop = false;
+                }
             }
+
+            int damageDealt = 0;
+            Console.WriteLine("\n"+user.Name + "\'s stat:\nHealth Level: " + user.Health+ "\nAttack Level: " + user.Attack+ "\nDefense Level: " + user.Defense+ "\nSpeed Level: " + user.Speed);
+            //Console.WriteLine("\nYour opponent's stat:\nHealth Level: " + computer.Health+ "\nAttack Level: " + computer.Attack+ "\nDefense Level: " + computer.Defense+ "\nSpeed Level: " + computer.Speed);
+            //computer stats was set random,delete the forward slashes to cheat.
+
+            
+            if(user.Speed > computer.Speed)
+            {
+                Console.WriteLine("\nYou have higher speed, so you'll go first");
+            }
+            else if(computer.Speed > user.Speed)
+            {
+
+                Console.WriteLine("\nYour opponent has higher speed, so your opponent go first");
+            }
+
+
+            string concede = "";
+            loop = true;
+            int round;
+            round= 0;
+            while (user.Health > 0 && computer.Health > 0 && user.Speed > computer.Speed && loop == true)
+            {
+                round += 1;
+                Console.WriteLine("--------------Round"+round+"-------------");
+                Console.WriteLine("      (=O*_*)=O     Q(*_*Q)");
+                Console.WriteLine("----------------End---------------");
+                damageDealt = user.Attack - computer.Defense;
+                if (damageDealt < 1)
+                {
+                   damageDealt = 1;
+                }
+                computer.Health -= damageDealt;
+
+                damageDealt = computer.Attack - user.Defense;
+                if (damageDealt < 1)
+                {
+                    damageDealt = 1;
+                }
+                user.Health -= damageDealt;
+                Console.WriteLine("\n\n--------------Result--------------");
+                Console.WriteLine(user.Name + "\'s Health Level: " + user.Health);
+                Console.WriteLine("Your opponent's Health Level: " + computer.Health);
+                Console.WriteLine("--------------Result--------------");
+                Console.WriteLine("Press X to concede , Anything else to continue\n\n\n");
+                concede = Console.ReadLine();
+                if(concede == "x"||concede == "X")
+                {
+                    loop = false;
+                }
+            }
+            round = 0;
+            while (user.Health > 0 && computer.Health > 0 && user.Speed < computer.Speed && loop == true)
+            {
+                round += 0;
+                Console.WriteLine("--------------Round" + round + "-------------");
+                Console.WriteLine("      (=O*_*)=O     Q(*_*Q)");
+                Console.WriteLine("----------------End---------------");
+                damageDealt = computer.Attack - user.Defense;
+                if (damageDealt < 1)
+                {
+                    damageDealt = 1;
+                }
+                user.Health -= damageDealt;
+
+                damageDealt = user.Attack - computer.Defense;
+                if (damageDealt < 1)
+                {
+                    damageDealt = 1;
+                }
+                computer.Health -= damageDealt;
+                Console.WriteLine("\n\n--------------Result-------------");
+                Console.WriteLine(user.Name + "\'s Health Level: " + user.Health);
+                Console.WriteLine("Your opponent's Health Level: " + computer.Health);
+                Console.WriteLine("Press X to concede , Anything else to continue\n\n\n");
+                concede = Console.ReadLine();
+                if (concede == "x" || concede == "X")
+                {
+                    loop = false;
+                }
+            }
+
+            if (computer.Health < 1)
+            {
+                Console.WriteLine("You Win!");
+            }else if(user.Health < 1)
+            {
+                Console.WriteLine("You Lose!");
+            }
+
+            Console.ReadKey();
+            
         } 
     }
 }
